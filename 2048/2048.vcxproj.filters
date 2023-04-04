@@ -21,6 +21,9 @@
     <ClCompile Include="view.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="game.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controller.h">
