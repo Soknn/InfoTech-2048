@@ -19,6 +19,7 @@ uint8_t getDigitCount(uint32_t number)
 	return count;
 }
 
+void clearConsole() { system("cls"); }
 
 void showGameField(uint8_t board[SIZE][SIZE])
 {
@@ -26,7 +27,6 @@ void showGameField(uint8_t board[SIZE][SIZE])
 		for (uint8_t x = 0; x < SIZE; x++) {
 			printf("\033[38;5;%d;48;5;%dm");
 			printf("       ");
-			printf("\033[m");
 		}
 		printf("\n");
 		for (uint8_t x = 0; x < SIZE; x++) {
@@ -41,14 +41,12 @@ void showGameField(uint8_t board[SIZE][SIZE])
 			{
 				printf("   ·   ");
 			}
-			printf("\033[m");
 		}
 		printf("\n");
 		for (uint8_t x = 0; x < SIZE; x++)
 		{
 			printf("\033[38;5;%d;48;5;%dm");
 			printf("       ");
-			printf("\033[m");
 		}
 		printf("\n");
 	}
@@ -63,13 +61,12 @@ void showHint()
 {
 	printf("\n");
 	printf("        ←,↑,→,↓ or q        \n");
-	printf("\033[A");
 }
 
 void updateUserInterface(uint8_t board[SIZE][SIZE], uint32_t score)
 {
-	printf("\033[H");
-	printf("2048.c %17d pts\n\n", score);
+	clearConsole();
+	printf("Счёт: %20d \n\n", score);
 	showGameField(board);
 	showHint();
 }

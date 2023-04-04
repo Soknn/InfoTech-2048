@@ -138,6 +138,12 @@ bool slideTo(uint8_t board[SIZE][SIZE], uint32_t* score, enum Direction directio
 }
 
 void init(uint8_t board[SIZE][SIZE]) {
+	for (auto x = 0; x < SIZE; x += 1) {
+		for (auto y = 0; y < SIZE; y += 1) {
+			board[x][y] = 0;
+		}
+	}
+
 	createRandomBlock(board);
 	createRandomBlock(board);
 }
