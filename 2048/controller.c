@@ -1,7 +1,7 @@
-﻿#include <stdlib.h>   // defines: srand
-#include <stdint.h>	  // defines: uint8_t, uint32_t
-#include <stdbool.h>  // defines: true, false
-#include <time.h>	  // defines: time
+﻿#include <stdlib.h>   // определяет: srand
+#include <stdint.h>	  // определяет: uint8_t, uint32_t
+#include <stdbool.h>  // определяет: true, false
+#include <time.h>	  // определяет: time
 #include "controller.h"
 
 uint8_t findTarget(uint8_t array[SIZE], uint8_t x, uint8_t stop) {
@@ -54,42 +54,16 @@ void rotateBoard(uint8_t board[SIZE][SIZE]) {
 	}
 }
 
-bool moveUp(uint8_t board[SIZE][SIZE], uint32_t* score) {
-	bool success = false;
+bool slide(uint8_t board[SIZE][SIZE], uint32_t* score, const int amountOfPreRotations, const int amountOfAfterRotations) {
+	for (uint8_t _ = 0; _ < amountOfPreRotations; _ += 1) rotateBoard(board);
 
-	for (uint8_t x = 0; x < SIZE; x += 1) success |= slideArray(board[x], score);
+	bool movedAny = false;
 
-	return success;
-}
+	for (uint8_t x = 0; x < SIZE; x += 1) movedAny |= slideArray(board[x], score);
 
-bool moveLeft(uint8_t board[SIZE][SIZE], uint32_t* score) {
-	rotateBoard(board);
+	for (uint8_t _ = 0; _ < amountOfAfterRotations; _ += 1) rotateBoard(board);
 
-	bool success = moveUp(board, score);
-
-	for (uint8_t _ = 0; _ < 3; _ += 1) rotateBoard(board);
-
-	return success;
-}
-
-bool moveDown(uint8_t board[SIZE][SIZE], uint32_t* score) {
-	for (uint8_t _ = 0; _ < 2; _ += 1) rotateBoard(board);
-
-	bool success = moveUp(board, score);
-
-	for (uint8_t _ = 0; _ < 2; _ += 1) rotateBoard(board);
-
-	return success;
-}
-
-bool moveRight(uint8_t board[SIZE][SIZE], uint32_t* score) {
-	for (uint8_t _ = 0; _ < 3; _ += 1) rotateBoard(board);
-
-	bool success = moveUp(board, score);
-
-	rotateBoard(board);
-
-	return success;
+	return movedAny;
 }
 
 bool findPairDown(uint8_t board[SIZE][SIZE]) {
@@ -136,12 +110,9 @@ void createRandomBlock(uint8_t board[SIZE][SIZE]) {
 		isGeneratorInitialized = true;
 	}
 
-	for (x = 0; x < SIZE; x++)
-	{
-		for (y = 0; y < SIZE; y++)
-		{
-			if (board[x][y] == 0)
-			{
+	for (x = 0; x < SIZE; x++) {
+		for (y = 0; y < SIZE; y++) {
+			if (board[x][y] == 0) {
 				list[len][0] = x;
 				list[len][1] = y;
 				len++;
@@ -159,9 +130,9 @@ void createRandomBlock(uint8_t board[SIZE][SIZE]) {
 
 bool moveTo(uint8_t board, uint32_t* score, enum Direction direction) {
 	switch (direction) {
-	case DOWN: return moveDown(board, score);
-	case UP: return moveUp(board, score);
-	case LEFT: return moveLeft(board, score);
-	case RIGHT: return moveRight(board, score);
+	case DOWN: return slide(board, score, 2, 2);
+	case UP: return slide(board, score, 0, 0);
+	case LEFT: return slide(board, score, 1, 3);
+	case RIGHT: return slide(board, score, 3, 1);
 	}
 }
