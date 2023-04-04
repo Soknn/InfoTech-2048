@@ -128,7 +128,7 @@ void createRandomBlock(uint8_t board[SIZE][SIZE]) {
 	}
 }
 
-bool moveTo(uint8_t board[SIZE][SIZE], uint32_t* score, enum Direction direction) {
+bool slideTo(uint8_t board[SIZE][SIZE], uint32_t* score, enum Direction direction) {
 	switch (direction) {
 	case DOWN: return slide(board, score, 2, 2);
 	case UP: return slide(board, score, 0, 0);

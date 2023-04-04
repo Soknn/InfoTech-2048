@@ -19,13 +19,6 @@ uint8_t getDigitCount(uint32_t number)
 	return count;
 }
 
-void updateUserInterface(uint8_t board[SIZE][SIZE], uint32_t score)
-{
-	printf("\033[H");
-	printf("2048.c %17d pts\n\n", score);
-	showGameField(board);
-	showHint();
-}
 
 void showGameField(uint8_t board[SIZE][SIZE])
 {
@@ -73,31 +66,32 @@ void showHint()
 	printf("\033[A");
 }
 
+void updateUserInterface(uint8_t board[SIZE][SIZE], uint32_t score)
+{
+	printf("\033[H");
+	printf("2048.c %17d pts\n\n", score);
+	showGameField(board);
+	showHint();
+}
+
 enum Direction convertToDirection(char keycode)
 {
-	if (keycode == -1)
-	{
-		puts("\nError! Cannot read keyboard input!");
-	}
-
 	switch (keycode)
 	{
-	case 97:  // 'a' key
-	case 104: // 'h' key
-	case 68:  // left arrow
+	case 'a':
+	case 68: 
 		return LEFT;
-	case 100: // 'd' key
-	case 108: // 'l' key
-	case 67:  // right arrow
+	case 'd':
+	case 67:
 		return RIGHT;
-	case 119: // 'w' key
-	case 107: // 'k' key
-	case 65:  // up arrow
+	case 'w':
+	case 65:
 		return UP;
-	case 115: // 's' key
-	case 106: // 'j' key
-	case 66:  // down arrow
+	case 's':
+	case 66:
 		return DOWN;
+	case 'q':
+		return QUIT;
 	default:
 		return UNDEFINED;
 	}
