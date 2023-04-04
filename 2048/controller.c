@@ -124,7 +124,7 @@ void createRandomBlock(uint8_t board[SIZE][SIZE]) {
 		r = rand() % len;
 		x = list[r][0];
 		y = list[r][1];
-		board[x][y] = (rand() / (RAND_MAX + 1.0) < 0.7) ? 2 : 4;
+		board[x][y] = (rand() / (RAND_MAX + 1.0) < 0.7) ? 1 : 2;
 	}
 }
 

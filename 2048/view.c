@@ -21,34 +21,14 @@ uint8_t getDigitCount(uint32_t number)
 
 void clearConsole() { system("cls"); }
 
-void showGameField(uint8_t board[SIZE][SIZE])
-{
+void showGameField(uint8_t board[SIZE][SIZE]) {
 	for (uint8_t y = 0; y < SIZE; y++) {
-		for (uint8_t x = 0; x < SIZE; x++) {
-			printf("\033[38;5;%d;48;5;%dm");
-			printf("       ");
-		}
 		printf("\n");
-		for (uint8_t x = 0; x < SIZE; x++) {
-			printf("\033[38;5;%d;48;5;%dm");
-			if (board[x][y] != 0)
-			{
-				uint32_t number = 1 << board[x][y];
-				uint8_t t = 7 - getDigitCount(number);
-				printf("%*s%u%*s", t - t / 2, "", number, t / 2, "");
-			}
-			else
-			{
-				printf("   ·   ");
-			}
-		}
-		printf("\n");
+
 		for (uint8_t x = 0; x < SIZE; x++)
-		{
-			printf("\033[38;5;%d;48;5;%dm");
-			printf("       ");
-		}
-		printf("\n");
+			printf("%*d", x == 0 ? 0 : 8, board[x][y] == 0 ? 0 : 1 << board[x][y]);
+
+		printf("\n\n");
 	}
 }
 
