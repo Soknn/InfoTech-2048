@@ -7,9 +7,14 @@ enum Direction {
 	RIGHT,
 	UP,
 	DOWN,
-	UNDEFINED
+	UNDEFINED,
+	QUIT
 };
 
 bool isGameOver(uint8_t board[SIZE][SIZE]);
 
-bool moveTo(uint8_t board, uint32_t* score, enum Direction direction);
+void createRandomBlock(uint8_t board[SIZE][SIZE]);
+
+bool slideTo(uint8_t board[SIZE][SIZE], uint32_t* score, enum Direction direction);
+
+void init(uint8_t board[SIZE][SIZE]);
