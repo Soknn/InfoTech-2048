@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3afacbfa-5695-431c-a8d1-61c7c98527b1}</ProjectGuid>
-    <RootNamespace>My2048</RootNamespace>
+    <ProjectGuid>{9347c885-ce54-4412-a0fa-577f6ae48034}</ProjectGuid>
+    <RootNamespace>My2048UnitTests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -109,6 +109,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>C:\Main\2-University\Labs-InfoTech\2048\2048\x64\Debug\controller.obj;C:\Main\2-University\Labs-InfoTech\2048\2048\x64\Debug\view.obj;C:\Main\2-University\Labs-InfoTech\2048\2048\x64\Debug\errorProcessor.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,17 +129,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="controller.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
-    </ClCompile>
-    <ClCompile Include="errorProcessor.c" />
-    <ClCompile Include="game.c" />
-    <ClCompile Include="view.c" />
+    <ProjectReference Include="..\2048\2048.vcxproj">
+      <Project>{3afacbfa-5695-431c-a8d1-61c7c98527b1}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="controller.h" />
-    <ClInclude Include="errorProcessor.h" />
-    <ClInclude Include="view.h" />
+    <ClCompile Include="controllerTests.c" />
+    <ClCompile Include="errorMessager.c" />
+    <ClCompile Include="main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="controllerTests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="errorMessager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

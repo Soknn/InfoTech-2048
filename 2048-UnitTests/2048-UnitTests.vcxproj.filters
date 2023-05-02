@@ -15,27 +15,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="controller.c">
+    <ClCompile Include="main.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="view.c">
+    <ClCompile Include="controllerTests.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="game.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="errorProcessor.c">
+    <ClCompile Include="errorMessager.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="controller.h">
+    <None Include="controllerTests.h">
       <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="view.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="errorProcessor.h">
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="errorMessager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

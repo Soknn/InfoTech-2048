@@ -2,27 +2,29 @@
 #include <stdbool.h>  // определяет: true, false
 #include <stdio.h>    // определяет: getchar
 #include <locale.h>
-#include "controller.h";
-#include "view.h";
+#include "controller.h"
+#include "view.h"
+#include "errorProcessor.h"
 
 int main() {
 	setlocale(LC_ALL, "");
 
-	uint8_t board[SIZE][SIZE];
-	uint32_t score = 0;
 	enum Direction direction;
 
-	init(board);
+	init();
 
 	while (true) {
-		updateUserInterface(board, score);
+		updateUserInterface();
 
-		direction = convertToDirection(getchar());
+		direction = convertToDirection((char)getchar());
 
-		if (direction == QUIT) break;
+		if (direction == UNDEFINED) {
+			processError(WRONG_INPUT_ERROR_CODE);
+			continue;
+		}
 
-		if (direction == UNDEFINED) continue;
+		if (direction == QUIT || isGameOver()) break;
 
-		if (slideTo(board, &score, direction)) createRandomBlock(board);
+		slideTo(direction);
 	}
 }

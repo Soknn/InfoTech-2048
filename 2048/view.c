@@ -21,12 +21,14 @@ uint8_t getDigitCount(uint32_t number)
 
 void clearConsole() { system("cls"); }
 
-void showGameField(uint8_t board[SIZE][SIZE]) {
+void showGameField() {
+	uint8_t** instanceOfField = getField();
+
 	for (uint8_t y = 0; y < SIZE; y++) {
 		printf("\n");
 
 		for (uint8_t x = 0; x < SIZE; x++)
-			printf("%*d", x == 0 ? 0 : 8, board[x][y] == 0 ? 0 : 1 << board[x][y]);
+			printf("%*d", x == 0 ? 0 : 8, instanceOfField[x][y] == 0 ? 0 : 1 << instanceOfField[x][y]);
 
 		printf("\n\n");
 	}
@@ -43,33 +45,40 @@ void showHint()
 	printf("        ←,↑,→,↓ or q        \n");
 }
 
-void updateUserInterface(uint8_t board[SIZE][SIZE], uint32_t score)
+void updateUserInterface()
 {
 	clearConsole();
-	printf("Счёт: %20d \n\n", score);
-	showGameField(board);
+
+	if (isGameOver()) showEndGameMenu();
+
+	printf("Счёт: %20d \n\n", getScore());
+	showGameField();
 	showHint();
+}
+
+void showError(const char* errorMessage) {
+	printf(errorMessage);
 }
 
 enum Direction convertToDirection(char keycode)
 {
 	switch (keycode)
 	{
-	case 'a':
-	case 68: 
-		return LEFT;
-	case 'd':
-	case 67:
-		return RIGHT;
-	case 'w':
-	case 65:
-		return UP;
-	case 's':
-	case 66:
-		return DOWN;
-	case 'q':
-		return QUIT;
-	default:
-		return UNDEFINED;
+		case 'a':
+		case 68:
+			return LEFT;
+		case 'd':
+		case 67:
+			return RIGHT;
+		case 'w':
+		case 65:
+			return UP;
+		case 's':
+		case 66:
+			return DOWN;
+		case 'q':
+			return QUIT;
+		default:
+			return UNDEFINED;
 	}
 }
