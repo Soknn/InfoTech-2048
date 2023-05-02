@@ -1,109 +1,119 @@
 ﻿#include <stdlib.h>   // определяет: srand
-#include <stdint.h>	  // определяет: uint8_t, uint32_t
 #include <stdbool.h>  // определяет: true, false
 #include <time.h>	  // определяет: time
 #include "controller.h"
 
-uint8_t findTarget(uint8_t array[SIZE], uint8_t x, uint8_t stop) {
+static int _field[SIZE][SIZE];
+
+static int _score;
+
+int** getField() {
+	return _field;
+}
+
+int getScore() { return _score; }
+
+int findTarget(int column[SIZE], int x, int stop) {
 	if (x == 0) return x;
 
-	for (uint8_t t = x - 1;; t -= 1) {
-		if (array[t] != 0) return array[t] != array[x] ? t + 1 : t;
+	for (int t = x - 1; ; t -= 1) {
+		if (column[t] != 0) return column[t] != column[x] ? t + 1 : t;
 		else if (t == stop) return t;
 	}
 
 	return x;
 }
 
-bool slideArray(uint8_t array[SIZE], uint32_t* score) {
+bool slideColumn(int column[SIZE]) {
 	bool success = false;
-	uint8_t x, t, stop = 0;
+	int x, t, stop = 0;
 
 	for (x = 0; x < SIZE; x += 1) {
-		if (array[x] == 0) continue;
+		if (column[x] == 0) continue;
 
-		t = findTarget(array, x, stop);
+		t = findTarget(column, x, stop);
 
 		if (t == x) continue;
 
-		if (array[t] == 0) {
-			array[t] = array[x];
+		if (column[t] == 0) {
+			column[t] = column[x];
 		}
-		else if (array[t] == array[x]) {
-			array[t] += 1;
-			*score += (uint32_t)1 << array[t];
+		else if (column[t] == column[x]) {
+			column[t] += 1;
+			_score += (int)1 << column[t];
 			stop = t + 1;
 		}
 
-		array[x] = 0;
+		column[x] = 0;
 		success = true;
 	}
 
 	return success;
 }
 
-void rotateBoard(uint8_t board[SIZE][SIZE]) {
-	for (uint8_t i = 0; i < SIZE / 2; i += 1) {
-		for (uint8_t j = i; j < SIZE - i - 1; j += 1) {
-			uint8_t tmp = board[i][j];
-			board[i][j] = board[j][SIZE - i - 1];
-			board[j][SIZE - i - 1] = board[SIZE - i - 1][SIZE - j - 1];
-			board[SIZE - i - 1][SIZE - j - 1] = board[SIZE - j - 1][i];
-			board[SIZE - j - 1][i] = tmp;
+void rotateField() {
+	for (int i = 0; i < SIZE / 2; i += 1) {
+		for (int j = i; j < SIZE - i - 1; j += 1) {
+			int tmp = _field[i][j];
+			_field[i][j] = _field[j][SIZE - i - 1];
+			_field[j][SIZE - i - 1] = _field[SIZE - i - 1][SIZE - j - 1];
+			_field[SIZE - i - 1][SIZE - j - 1] = _field[SIZE - j - 1][i];
+			_field[SIZE - j - 1][i] = tmp;
 		}
 	}
 }
 
-bool slide(uint8_t board[SIZE][SIZE], uint32_t* score, const int amountOfPreRotations, const int amountOfAfterRotations) {
-	for (uint8_t _ = 0; _ < amountOfPreRotations; _ += 1) rotateBoard(board);
+bool slide(const int amountOfPreRotations, const int amountOfAfterRotations) {
+	for (auto _ = 0; _ < amountOfPreRotations; _ += 1) rotateField();
 
 	bool movedAny = false;
 
-	for (uint8_t x = 0; x < SIZE; x += 1) movedAny |= slideArray(board[x], score);
+	for (int columnIndex = 0; columnIndex < SIZE; columnIndex += 1)
+		movedAny |= slideColumn(_field[columnIndex]);
 
-	for (uint8_t _ = 0; _ < amountOfAfterRotations; _ += 1) rotateBoard(board);
+	for (auto _ = 0; _ < amountOfAfterRotations; _ += 1) rotateField();
 
 	return movedAny;
 }
 
-bool findPairDown(uint8_t board[SIZE][SIZE]) {
-	for (uint8_t x = 0; x < SIZE; x += 1) {
-		for (uint8_t y = 0; y < SIZE - 1; y += 1) {
-			if (board[x][y] == board[x][y + 1]) return true;
+bool findPairDown() {
+	for (auto x = 0; x < SIZE; x += 1) {
+		for (auto y = 0; y < SIZE - 1; y += 1) {
+			if (_field[x][y] == _field[x][y + 1]) return true;
 		}
 	}
 
 	return false;
 }
 
-uint8_t countEmpty(uint8_t board[SIZE][SIZE]) {
-	uint8_t count = 0;
+int countEmpty() {
+	int count = 0;
 
-	for (uint8_t x = 0; x < SIZE; x++) {
-		for (uint8_t y = 0; y < SIZE; y++) {
-			if (board[x][y] == 0) count += 1;
+	for (auto x = 0; x < SIZE; x++) {
+		for (auto y = 0; y < SIZE; y++) {
+			if (_field[x][y] == 0) count += 1;
 		}
 	}
 
 	return count;
 }
 
-bool isGameOver(uint8_t board[SIZE][SIZE]) {
-	if (countEmpty(board) > 0 || findPairDown(board)) return false;
+bool isGameOver() {
+	if (countEmpty() > 0 || findPairDown()) return false;
 
-	rotateBoard(board);
+	rotateField();
 
-	bool isGameOver = !findPairDown(board);
+	bool isGameOver = !findPairDown();
 
-	for (uint8_t _ = 0; _ < 3; _ += 1) rotateBoard(board);
+	for (auto _ = 0; _ < 3; _ += 1) rotateField();
 
 	return isGameOver;
 }
 
-void createRandomBlock(uint8_t board[SIZE][SIZE]) {
+void createRandomBlock() {
 	static bool isGeneratorInitialized = false;
-	uint8_t x, y, r, len = 0;
-	uint8_t list[SIZE * SIZE][2];
+	int x, y, r, len = 0;
+	int list[SIZE * SIZE][2];
 
 	if (!isGeneratorInitialized) {
 		srand(time(NULL));
@@ -112,7 +122,7 @@ void createRandomBlock(uint8_t board[SIZE][SIZE]) {
 
 	for (x = 0; x < SIZE; x++) {
 		for (y = 0; y < SIZE; y++) {
-			if (board[x][y] == 0) {
+			if (_field[x][y] == 0) {
 				list[len][0] = x;
 				list[len][1] = y;
 				len++;
@@ -124,26 +134,30 @@ void createRandomBlock(uint8_t board[SIZE][SIZE]) {
 		r = rand() % len;
 		x = list[r][0];
 		y = list[r][1];
-		board[x][y] = (rand() / (RAND_MAX + 1.0) < 0.7) ? 1 : 2;
+		_field[x][y] = (rand() / (RAND_MAX + 1.0) < 0.7) ? 1 : 2;
 	}
 }
 
-bool slideTo(uint8_t board[SIZE][SIZE], uint32_t* score, enum Direction direction) {
+void slideTo(enum Direction direction) {
+	bool wasSlid = false;
+
 	switch (direction) {
-	case DOWN: return slide(board, score, 2, 2);
-	case UP: return slide(board, score, 0, 0);
-	case LEFT: return slide(board, score, 1, 3);
-	case RIGHT: return slide(board, score, 3, 1);
+		case DOWN: wasSlid = slide(2, 2); break;
+		case UP: wasSlid = slide(0, 0); break;
+		case LEFT: wasSlid = slide(1, 3); break;
+		case RIGHT: wasSlid = slide(3, 1); break;
 	}
+
+	if (wasSlid) createRandomBlock();
 }
 
-void init(uint8_t board[SIZE][SIZE]) {
-	for (auto x = 0; x < SIZE; x += 1) {
-		for (auto y = 0; y < SIZE; y += 1) {
-			board[x][y] = 0;
-		}
-	}
+void init() {
+	_score = 0;
 
-	createRandomBlock(board);
-	createRandomBlock(board);
+	for (auto x = 0; x < SIZE; x += 1)
+		for (auto y = 0; y < SIZE; y += 1)
+			_field[x][y] = 0;
+
+	createRandomBlock(_field);
+	createRandomBlock(_field);
 }

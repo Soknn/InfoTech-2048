@@ -131,11 +131,13 @@
     <ClCompile Include="controller.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
     </ClCompile>
+    <ClCompile Include="errorProcessor.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="view.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controller.h" />
+    <ClInclude Include="errorProcessor.h" />
     <ClInclude Include="view.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
