@@ -7,9 +7,7 @@ static int _field[SIZE][SIZE];
 
 static int _score;
 
-int** getField() {
-	return _field;
-}
+int getValueAt(int column, int row) { return _field[column][row]; }
 
 int getScore() { return _score; }
 
@@ -18,7 +16,8 @@ int findTarget(int column[SIZE], int x, int stop) {
 
 	for (int t = x - 1; ; t -= 1) {
 		if (column[t] != 0) return column[t] != column[x] ? t + 1 : t;
-		else if (t == stop) return t;
+
+		if (t == stop) return t;
 	}
 
 	return x;
@@ -40,7 +39,7 @@ bool slideColumn(int column[SIZE]) {
 		}
 		else if (column[t] == column[x]) {
 			column[t] += 1;
-			_score += (int)1 << column[t];
+			_score += column[t];
 			stop = t + 1;
 		}
 
@@ -134,7 +133,7 @@ void createRandomBlock() {
 		r = rand() % len;
 		x = list[r][0];
 		y = list[r][1];
-		_field[x][y] = (rand() / (RAND_MAX + 1.0) < 0.7) ? 1 : 2;
+		_field[x][y] = (rand() / (RAND_MAX + 1.0) < 0.7) ? BASE_VALUE : BASE_VALUE * 2;
 	}
 }
 
