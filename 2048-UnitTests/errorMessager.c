@@ -1,6 +1,6 @@
 #include "errorMessager.h"
-#include <cstdio>
-#include <locale>
+#include <stdio.h>
+#include <locale.h>
 
 void showErrorMessageByCode(int code) {
 	setlocale(LC_ALL, "");

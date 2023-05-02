@@ -22,13 +22,12 @@ uint8_t getDigitCount(uint32_t number)
 void clearConsole() { system("cls"); }
 
 void showGameField() {
-	uint8_t** instanceOfField = getField();
-
-	for (uint8_t y = 0; y < SIZE; y++) {
+	
+	for (int y = 0; y < SIZE; y++) {
 		printf("\n");
 
-		for (uint8_t x = 0; x < SIZE; x++)
-			printf("%*d", x == 0 ? 0 : 8, instanceOfField[x][y] == 0 ? 0 : 1 << instanceOfField[x][y]);
+		for (int x = 0; x < SIZE; x++)
+			printf("%*d", x == 0 ? 0 : 8, getValueAt(x, y));
 
 		printf("\n\n");
 	}
