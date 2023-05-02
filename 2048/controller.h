@@ -60,3 +60,9 @@ void slideTo(enum Direction direction);
  * @author Калугин Илья
  */
 void init();
+
+/*
+ * @brief Функция, устанавливающая новое поле
+ * @author Калугин Илья
+ */
+void setField(int field[SIZE][SIZE]);

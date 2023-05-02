@@ -135,10 +135,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="controllerTests.c" />
+    <ClCompile Include="errorMessager.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="controllerTests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="errorMessager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

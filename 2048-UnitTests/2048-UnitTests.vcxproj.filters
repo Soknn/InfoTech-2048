@@ -21,10 +21,18 @@
     <ClCompile Include="controllerTests.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="errorMessager.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="controllerTests.h">
       <Filter>Файлы заголовков</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="errorMessager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
