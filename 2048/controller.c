@@ -38,7 +38,7 @@ bool slideColumn(int column[SIZE]) {
 			column[t] = column[x];
 		}
 		else if (column[t] == column[x]) {
-			column[t] += 1;
+			column[t] *= 2;
 			_score += column[t];
 			stop = t + 1;
 		}
@@ -159,4 +159,10 @@ void init() {
 
 	createRandomBlock(_field);
 	createRandomBlock(_field);
+}
+
+void setField(int field[SIZE][SIZE]) {
+	for (auto x = 0; x < SIZE; x += 1)
+		for (auto y = 0; y < SIZE; y += 1)
+			_field[x][y] = field[x][y];
 }
