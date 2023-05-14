@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -103,14 +104,16 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <ConformanceMode>Default</ConformanceMode>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
       <CompileAs>CompileAsC</CompileAs>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Main\2-University\Labs-InfoTech\2048\2048\x64\Debug\controller.obj;C:\Main\2-University\Labs-InfoTech\2048\2048\x64\Debug\view.obj;C:\Main\2-University\Labs-InfoTech\2048\2048\x64\Debug\errorProcessor.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\controller.obj;C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\view.obj;C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\errorProcessor.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,12 +141,24 @@
     <ClCompile Include="controllerTests.c" />
     <ClCompile Include="errorMessager.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="viewTests.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="controllerTests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="errorMessager.h" />
+    <ClInclude Include="viewTests.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="convertToDirectionAct.txt" />
+    <Text Include="errorResult.txt" />
+    <Text Include="showHintAct.txt" />
+    <Text Include="showHintExpect.txt" />
+    <Text Include="testShowHintAct.txt" />
+    <Text Include="updateUserInterface.txt" />
+    <Text Include="updateUserInterfaceAct.txt" />
+    <Text Include="updateUserInterfaceExpect.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
