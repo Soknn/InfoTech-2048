@@ -4,13 +4,13 @@
 
 /*
  * @brief Константа, определяющая размер стороны поля
- * @author Калугин Илья
+ * @author Клюшин Максим
  */
 #define SIZE 4
 
 /*
 * @brief Константа, опредляющая начальное значение кубика
-* @author Калугин Илья
+* @author Клюшин Максим
 */
 #define BASE_VALUE 2
 
@@ -51,7 +51,7 @@ bool isGameOver();
 /*
  * @brief Функция, перемещающая кубики на поле в определенном направлении
  * @param[in] direction направление, куда направляются кубики
- * @author Калугин Илья
+ * @author Клюшин Максим
  */
 void slideTo(enum Direction direction);
 
