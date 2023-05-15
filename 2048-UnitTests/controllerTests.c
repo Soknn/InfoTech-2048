@@ -60,6 +60,28 @@ void testGetValueAt() {
 	showErrorMessageByCode(errorCode);
 }
 
+void testIsGameOver() {
+	bool isGameScoreExpect = false;
+	bool isGameScoreAct = isGameOver();
+	printf("Ожидаемое значение: %d\n", isGameScoreExpect);
+	printf("Полученное значение: %d\n", isGameScoreAct);
+	if (isGameScoreExpect == isGameScoreAct) {
+		showErrorMessageByCode(WRONG_GAME_OVER);
+	}
+	showErrorMessageByCode(RIGHT_GAME_OVER);
+}
+
+void testGetScore() {
+	int scoreExpect = 0;
+	int scoreAct = getScore();
+	printf("Ожидаемое значение: %d\n", scoreExpect);
+	printf("Полученное значение: %d\n", scoreAct);
+	if (scoreExpect == scoreAct) {
+		showErrorMessageByCode(WRONG_SCORE);
+	}
+	showErrorMessageByCode(RIGHT_SCORE);
+}
+
 void testSlideTo() {
 	int field[4][4] = { {0, 0, 0, 0 }, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0} };
 	const int expectedField[4][4] = { {0, 0, 0, 0 }, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0} };
@@ -87,7 +109,7 @@ void testSlideTo() {
 
 void testController() {
 	printf("| Тесты контроллера |\n");
-
+	testGetScore();
 	testGetValueAt();
 	testSlideTo();
 }

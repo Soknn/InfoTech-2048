@@ -19,6 +19,18 @@ void showErrorMessageByCode(int code) {
 		case RIGHT_SLIDED_FIELD:
 			printf("Верное поле после смаха!\n");
 			break;
+		case RIGHT_SCORE:
+			printf("Верное возвращение счёта!\n");
+			break;
+		case RIGHT_GAME_OVER:
+			printf("Верное возвращение признака окончания игры!\n");
+			break;
+		case WRONG_GAME_OVER:
+			printf("Неверное возвращение признака окончания игры!\n");
+			break;
+		case WRONG_SCORE:
+			printf("Неверное возвращение счёта!\n");
+			break;
 		case ABSENT_SOURCE_ACT:
 			printf("Отсутсвует файл полученных значений!\n");
 		case ABSENT_SOURCE_EXPECT:
