@@ -4,7 +4,7 @@
 #include <locale.h>
 #include "controller.h"
 #include "view.h"
-#include "errorProcessor.h"
+#include "errorProcess.h"
 
 int main() {
 	setlocale(LC_ALL, "");

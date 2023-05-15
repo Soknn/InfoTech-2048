@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include "errorMessager.h"
 #include "../2048/view.h"
-#define MAX_BUFFER_SIZE 100
+#include "main.h"
 
 bool compareFile(FILE* firstFile, FILE* secondFile) {
     char firstBuffer[MAX_BUFFER_SIZE];
-    fgets(firstBuffer, 100, firstFile);
+    fgets(firstBuffer, MAX_BUFFER_SIZE, firstFile);
     char secondBuffer[MAX_BUFFER_SIZE];
-    fgets(secondBuffer, 100, secondFile);
+    fgets(secondBuffer, MAX_BUFFER_SIZE, secondFile);
     if (strcmp(firstBuffer, secondBuffer) == 0) {
         return true;
     }
@@ -32,16 +32,17 @@ void compareInterfaceActWithExpect(char* fileNameAct, char* fileNameExpect, int 
     }
     else
     {
-        fclose(fileAct);
-        fclose(file1Expect);
 
 
-        if (compareFile(fileAct, file1Expect) == 0) {
+        if (compareFile(fileAct, file1Expect)) {
             errorCode = successErrorCode;
         }
         else {
             errorCode = wrongErrorCode;
         }
+
+        fclose(fileAct);
+        fclose(file1Expect);
     }
     showErrorMessageByCode(errorCode);
 
@@ -49,31 +50,34 @@ void compareInterfaceActWithExpect(char* fileNameAct, char* fileNameExpect, int 
 
 
 void testUpdateUserInterface() {
+    printf("| Тест обновления интерфейса |\n");
     int errorCode;
     char* fileNameAct = "updateUserInterfaceAct.txt";
     char* fileNameExpect = "updateUserInterfaceExpect.txt";
 
     freopen(fileNameAct, "w", stdout);
     updateUserInterface();
-    freopen("con", "w", stdout);
+    freopen(FILE_NAME_RESULT, "a", stdout);
 
     compareInterfaceActWithExpect(fileNameAct, fileNameExpect, RIGHT_UPDATE_USER_INTERFACE, WRONG_UPDATE_USER_INTERFACE);
 }
 
 void testShowError() {
-    char* fileNameAct = "showHintAct.txt";
-    char* fileNameExpect = "showHintExpect.txt";
+    printf("| Тест отображения ошибок |\n");
+    char* fileNameAct = "showErrorAct.txt";
+    char* fileNameExpect = "showErrorExpect.txt";
     char* testErrorText = "Test error";
 
     freopen(fileNameAct, "w", stdout);
     showError(testErrorText);
-    freopen("con", "w", stdout);
+    freopen("errorResult.txt", "a", stdout);
 
     compareInterfaceActWithExpect(fileNameAct, fileNameExpect, RIGHT_SHOW_ERROR, WRONG_SHOW_ERROR);
 
 }
 
 void testConvertToDirection() {
+    printf("| Тест преобразования введённого направления |\n");
     int errorCode;
     char* fileNameAct = "convertToDirectionAct.txt";
     char* fileNameExpect = "convertToDirectionExpect.txt";
@@ -87,7 +91,7 @@ void testConvertToDirection() {
 }
 
 void testView() {
-    printf("| Тесты модуля графического отображения |\n");
+    printf("| Тест модуля графического отображения |\n");
     testShowError();
     testConvertToDirection();
 	testUpdateUserInterface();

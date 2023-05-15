@@ -1,5 +1,5 @@
 #include "view.h"
-#include "errorProcessor.h"
+#include "errorProcess.h"
 
 void processError(int errorCode) {
 	switch (errorCode)

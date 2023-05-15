@@ -24,7 +24,7 @@
     <ClCompile Include="game.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="errorProcessor.c">
+    <ClCompile Include="errorProcess.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="view.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="errorProcessor.h">
+    <ClInclude Include="errorProcess.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

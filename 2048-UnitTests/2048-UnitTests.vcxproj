@@ -113,7 +113,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\controller.obj;C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\view.obj;C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\errorProcessor.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\controller.obj;C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\view.obj;C:\Users\ruslu\source\repos\InfoTech-2048\2048\x64\Debug\errorProcess.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="controllerTests.c" />
     <ClCompile Include="errorMessager.c" />
+    <ClCompile Include="errorProcessTests.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="viewTests.c" />
   </ItemGroup>
@@ -148,13 +149,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="errorMessager.h" />
+    <ClInclude Include="errorProcessTests.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="viewTests.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="convertToDirectionAct.txt" />
     <Text Include="errorResult.txt" />
-    <Text Include="showHintAct.txt" />
-    <Text Include="showHintExpect.txt" />
+    <Text Include="processInputErrorAct.txt" />
+    <Text Include="processInputErrorExpect.txt" />
+    <Text Include="showErrorAct.txt" />
+    <Text Include="showErrorExpect.txt" />
     <Text Include="testShowHintAct.txt" />
     <Text Include="updateUserInterface.txt" />
     <Text Include="updateUserInterfaceAct.txt" />

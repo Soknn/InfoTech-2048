@@ -27,6 +27,9 @@
     <ClCompile Include="errorMessager.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="errorProcessTests.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="controllerTests.h">
@@ -40,15 +43,23 @@
     <ClInclude Include="viewTests.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="errorProcessTests.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="showHintAct.txt" />
-    <Text Include="showHintExpect.txt" />
     <Text Include="testShowHintAct.txt" />
     <Text Include="updateUserInterface.txt" />
     <Text Include="updateUserInterfaceAct.txt" />
     <Text Include="updateUserInterfaceExpect.txt" />
     <Text Include="convertToDirectionAct.txt" />
     <Text Include="errorResult.txt" />
+    <Text Include="showErrorAct.txt" />
+    <Text Include="showErrorExpect.txt" />
+    <Text Include="processInputErrorAct.txt" />
+    <Text Include="processInputErrorExpect.txt" />
   </ItemGroup>
 </Project>
