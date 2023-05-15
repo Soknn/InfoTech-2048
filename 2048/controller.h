@@ -37,21 +37,21 @@ int getValueAt(int column, int row);
 /*
  * @brief Функция, возвращающая текущий счёт игрока
  * @return текущий счёт игрока
- * @author Калугин Илья
+ * @author Клюшин Максим
  */
 int getScore();
 
 /*
  * @brief Функция, указывающая закончились ли легальные ходы для игрока
  * @return проиграл ли игрок
- * @author Калугин Илья
+ * @author Клюшин Максим
  */
 bool isGameOver();
 
 /*
  * @brief Функция, перемещающая кубики на поле в определенном направлении
  * @param[in] direction направление, куда направляются кубики
- * @author Клюшин Максим
+ * @author Калугин Илья
  */
 void slideTo(enum Direction direction);
 
