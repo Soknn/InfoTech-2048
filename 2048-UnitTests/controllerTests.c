@@ -61,25 +61,30 @@ void testGetValueAt() {
 }
 
 void testIsGameOver() {
-	bool isGameScoreExpect = false;
+	bool isGameScoreExpect = true;
 	bool isGameScoreAct = isGameOver();
 	printf("Ожидаемое значение: %d\n", isGameScoreExpect);
 	printf("Полученное значение: %d\n", isGameScoreAct);
 	if (isGameScoreExpect == isGameScoreAct) {
+		showErrorMessageByCode(RIGHT_GAME_OVER);
+	}
+	else {
 		showErrorMessageByCode(WRONG_GAME_OVER);
 	}
-	showErrorMessageByCode(RIGHT_GAME_OVER);
 }
 
 void testGetScore() {
-	int scoreExpect = 0;
+	int scoreExpect = 10;
 	int scoreAct = getScore();
 	printf("Ожидаемое значение: %d\n", scoreExpect);
 	printf("Полученное значение: %d\n", scoreAct);
 	if (scoreExpect == scoreAct) {
+		showErrorMessageByCode(RIGHT_SCORE);
+	}
+	else {
 		showErrorMessageByCode(WRONG_SCORE);
 	}
-	showErrorMessageByCode(RIGHT_SCORE);
+
 }
 
 void testSlideTo() {
@@ -110,6 +115,7 @@ void testSlideTo() {
 void testController() {
 	printf("| Тесты контроллера |\n");
 	testGetScore();
+	testIsGameOver();
 	testGetValueAt();
 	testSlideTo();
 }
